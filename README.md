@@ -1,4 +1,4 @@
-# FoodHub - Zomato-like Food Delivery Application
+#  Foodour Delivery Application
 
 A full-stack, 3-tier food delivery application built with React, Node.js, and MongoDB. This project includes **restaurants** with different cuisines, complete order management, and real-time status tracking.
 
