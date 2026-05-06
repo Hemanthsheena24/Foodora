@@ -1,0 +1,176 @@
+.orders-page {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 2rem;
+}
+
+.orders-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.orders-container h1 {
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.no-orders {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.no-orders p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.start-shopping {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: #ff6b35;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.start-shopping:hover {
+  background-color: #e55a2b;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.order-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.order-header h3 {
+  color: #333;
+  margin: 0;
+}
+
+.status-badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+}
+
+.status-badge.placed {
+  background-color: #3498db;
+}
+
+.status-badge.accepted {
+  background-color: #2ecc71;
+}
+
+.status-badge.preparing {
+  background-color: #f39c12;
+}
+
+.status-badge.out_for_delivery {
+  background-color: #9b59b6;
+}
+
+.status-badge.delivered {
+  background-color: #27ae60;
+}
+
+.status-badge.cancelled {
+  background-color: #e74c3c;
+}
+
+.order-details {
+  margin-bottom: 1rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  color: #666;
+}
+
+.detail-row.total {
+  font-weight: bold;
+  color: #333;
+  border-top: 1px solid #eee;
+  padding-top: 0.8rem;
+  margin-top: 0.8rem;
+  font-size: 1.1rem;
+}
+
+.order-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.track-btn {
+  flex: 1;
+  text-align: center;
+  padding: 0.8rem 1rem;
+  background-color: #ff6b35;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.track-btn:hover {
+  background-color: #e55a2b;
+}
+
+.error-message {
+  background-color: #fee;
+  color: #c33;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+.error-container {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}

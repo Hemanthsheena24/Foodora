@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: food-delivery-frontend
+  namespace: food-delivery
+  labels:
+    app.kubernetes.io/name: food-delivery-frontend
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: food-delivery
+    app.kubernetes.io/version: "1.0.0"
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "80"
+    description: "Frontend React application for Food Delivery"
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: food-delivery-frontend
+      app.kubernetes.io/component: frontend
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: food-delivery-frontend
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/part-of: food-delivery
+      annotations:
+        checksum/config: "ghi789"
+        kubectl.kubernetes.io/restartedAt: ""
+    spec:
+      securityContext:
+        runAsUser: 101
+        runAsGroup: 101
+        fsGroup: 101
+      containers:
+      - name: nginx
+        image: food-delivery-frontend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          name: http
+          protocol: TCP
+        env:
+        - name: REACT_APP_API_URL
+          valueFrom:
+            configMapKeyRef:
+              name: food-delivery-config
+              key: REACT_APP_API_URL
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "50m"
+          limits:
+            memory: "256Mi"
+            cpu: "150m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          capabilities:
+            drop:
+            - ALL
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                  - food-delivery-frontend
+              topologyKey: kubernetes.io/hostname
+      tolerations:
+      - key: "frontend"
+        operator: "Equal"
+        value: "web"
+        effect: "NoSchedule"

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: food-delivery-config
+  namespace: food-delivery
+spec:
+  data:
+    NODE_ENV: "staging"
+    REACT_APP_API_URL: "https://api.food-delivery-staging.company.com/api"
+    CORS_ORIGIN: "https://food-delivery-staging.company.com"
+    LOG_LEVEL: "info"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: food-delivery-backend
+spec:
+  replicas: 2
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: food-delivery-frontend
+spec:
+  replicas: 2

@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7-jammy
+    container_name: food-delivery-mongodb
+    restart: unless-stopped
+    env_file:
+      - .env.docker
+    volumes:
+      - mongodb_data:/data/db
+      - ./backend/scripts:/docker-entrypoint-initdb.d
+    ports:
+      - "27017:27017"
+    networks:
+      - food-delivery-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: food-delivery-backend
+    restart: unless-stopped
+    env_file:
+      - .env.docker
+    ports:
+      - "5000:5000"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - food-delivery-network
+    volumes:
+      - ./backend/public:/app/public:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    command: sh -c "sleep 10 && node seed.js && npm start"
+
+  # Frontend React App
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: food-delivery-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - food-delivery-network
+    env_file:
+      - .env.docker
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  food-delivery-network:
+    driver: bridge

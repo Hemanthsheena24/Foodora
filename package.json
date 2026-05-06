@@ -1,0 +1,12 @@
+{
+  "name": "food-delivery-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node startup.js",
+    "dev": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm start",
+    "seed": "cd backend && node seed.js",
+    "install-all": "cd backend && npm install && cd ../frontend && npm install"
+  }
+}

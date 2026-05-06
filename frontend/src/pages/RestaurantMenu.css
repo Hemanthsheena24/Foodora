@@ -1,0 +1,154 @@
+.restaurant-menu {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+.restaurant-header {
+  position: relative;
+  height: 300px;
+  background-color: white;
+}
+
+.header-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.restaurant-details {
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, rgba(200, 240, 255, 0.95) 0%, rgba(180, 235, 245, 0.95) 100%);
+  border-bottom: 1px solid #ddd;
+  backdrop-filter: blur(10px);
+}
+
+.restaurant-details h1 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+  font-size: 2rem;
+}
+
+.description {
+  color: #666;
+  margin: 0.5rem 0;
+}
+
+.meta-info {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+  color: #666;
+}
+
+.menu-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 2rem auto;
+  gap: 2rem;
+  padding: 0 2rem;
+}
+
+.categories-sidebar {
+  width: 200px;
+  background: linear-gradient(135deg, rgba(200, 240, 255, 0.95) 0%, rgba(180, 235, 245, 0.95) 100%);
+  padding: 1.5rem;
+  border-radius: 8px;
+  height: fit-content;
+  backdrop-filter: blur(10px);
+}
+
+.categories-sidebar h3 {
+  margin-top: 0;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.categories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.category-btn {
+  padding: 0.7rem 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s;
+}
+
+.category-btn:hover {
+  border-color: #ff6b35;
+  color: #ff6b35;
+}
+
+.category-btn.active {
+  background-color: #ff6b35;
+  color: white;
+  border-color: #ff6b35;
+}
+
+.menu-items-container {
+  flex: 1;
+}
+
+.menu-items-container h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.menu-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.no-items {
+  text-align: center;
+  color: #666;
+  padding: 2rem;
+}
+
+.error-container {
+  text-align: center;
+  padding: 3rem;
+  color: #c33;
+}
+
+.error-container button {
+  margin-top: 1rem;
+  padding: 0.8rem 2rem;
+  background-color: #ff6b35;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .menu-container {
+    flex-direction: column;
+  }
+
+  .categories-sidebar {
+    width: 100%;
+  }
+
+  .categories-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .category-btn {
+    flex: 1;
+    min-width: 100px;
+  }
+
+  .meta-info {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}

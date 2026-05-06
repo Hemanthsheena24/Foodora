@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: food-delivery-ingress
+  namespace: food-delivery
+  labels:
+    app.kubernetes.io/name: food-delivery
+    app.kubernetes.io/component: ingress
+    app.kubernetes.io/part-of: food-delivery
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+    nginx.ingress.kubernetes.io/rate-limit-window: "1m"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    external-dns.alpha.kubernetes.io/hostname: "food-delivery.company.com,api.food-delivery.company.com"
+spec:
+  tls:
+  - hosts:
+    - food-delivery.company.com
+    - api.food-delivery.company.com
+    secretName: food-delivery-tls
+  rules:
+  - host: food-delivery.company.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: food-delivery-frontend
+            port:
+              number: 80
+  - host: api.food-delivery.company.com
+    http:
+      paths:
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: food-delivery-backend
+            port:
+              number: 80

@@ -1,0 +1,151 @@
+.home {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+.home-header {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4rem 2rem;
+  text-align: center;
+  color: #333;
+  backdrop-filter: blur(10px);
+}
+
+.header-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.header-content p {
+  font-size: 1.3rem;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+.welcome-banner {
+  background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+  color: white;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.banner-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.banner-content p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.banner-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-primary {
+  background-color: white;
+  color: #ff6b35;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn-secondary:hover {
+  background-color: white;
+  color: #ff6b35;
+}
+
+.restaurants-container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3rem 0;
+  backdrop-filter: blur(10px);
+}
+
+.restaurants-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.restaurants-section h2 {
+  color: #333;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.restaurants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.restaurants-footer {
+  text-align: center;
+  padding: 2rem 0;
+  color: #666;
+  border-top: 1px solid #eee;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+}
+
+.error-message {
+  background-color: rgba(255, 0, 0, 0.1);
+  border: 1px solid #ff6b35;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .banner-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .banner-actions {
+    flex-direction: column;
+  }
+
+  .restaurants-grid {
+    grid-template-columns: 1fr;
+  }
+}

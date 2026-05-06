@@ -1,0 +1,45 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+metadata:
+  name: food-delivery-base
+  annotations:
+    config.kubernetes.io/local-config: "true"
+
+# Common labels applied to all resources
+commonLabels:
+  app.kubernetes.io/part-of: food-delivery
+  managed-by: kustomize
+
+# Namespace for all resources
+namespace: food-delivery
+
+# Resources to include
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - secrets.yaml
+  - mongodb-pvc.yaml
+  - mongodb-deployment.yaml
+  - mongodb-service.yaml
+  - backend-deployment.yaml
+  - backend-service.yaml
+  - frontend-deployment.yaml
+  - frontend-service.yaml
+  - ingress.yaml
+  - backend-hpa.yaml
+
+# Image transformations
+images:
+  - name: food-delivery-backend
+    newTag: latest
+  - name: food-delivery-frontend
+    newTag: latest
+  - name: mongo
+    newTag: "7.0-jammy"
+
+# ConfigMap generator for MongoDB init scripts
+configMapGenerator:
+  - name: mongodb-init-scripts
+    files:
+      - ../../backend/seed.js

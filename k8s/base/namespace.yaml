@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: food-delivery
+  labels:
+    name: food-delivery
+    app.kubernetes.io/name: food-delivery
+    app.kubernetes.io/component: namespace
+  annotations:
+    description: "Namespace for Food Delivery application"
+    contact: "platform-team@company.com"
+    cost-center: "engineering-delivery"

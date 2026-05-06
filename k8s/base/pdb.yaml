@@ -1,0 +1,29 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: food-delivery-backend-pdb
+  namespace: food-delivery
+  labels:
+    app.kubernetes.io/name: food-delivery-backend
+    app.kubernetes.io/component: pdb
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: food-delivery-backend
+      app.kubernetes.io/component: backend
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: food-delivery-frontend-pdb
+  namespace: food-delivery
+  labels:
+    app.kubernetes.io/name: food-delivery-frontend
+    app.kubernetes.io/component: pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: food-delivery-frontend
+      app.kubernetes.io/component: frontend
